@@ -16,7 +16,7 @@ export default function BookSearch() {
     event.preventDefault();
     axios
       .get(
-        "https://www.googleapis.com/books/v1/volumes?q=" + book + "&key=" + apiKey + "&maxResult=10"
+        "https://www.googleapis.com/books/v1/volumes?q=" + book + "&key=" + apiKey + "&maxResult=5"
       )
       .then((data) => {
         console.log("data from submit-->", data.data.items);

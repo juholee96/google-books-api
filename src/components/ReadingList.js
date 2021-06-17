@@ -10,3 +10,7 @@ class ReadingList extends Component {
 }
 
 export default ReadingList;
+
+// Might need to recode using redux (store)
+// by using Redux-React, allow the add button to add to the reading list
+//
