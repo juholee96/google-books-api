@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
 
-export default function BookSearch() {
+const BookSearch = (props) => {
+  console.log("props from search", props);
   const [book, setBook] = useState("");
   const [result, setResult] = useState([]);
   const [apiKey, setApiKey] = useState("AIzaSyBTq38Uipjiua2-MXqpwVVmkZNP9eq0FqQ");
-  const [bookList, setBookList] = useState([]);
+  //const [bookList, setBookList] = useState([]);
 
   function handleChange(event) {
     const book = event.target.value;
@@ -23,15 +23,9 @@ export default function BookSearch() {
         setResult(data.data.items);
       });
   }
-
-  function handleAdd(event) {
-    const bookToAdd = event.target;
-    console.log(bookToAdd);
-    setBookList(book);
-  }
-
   return (
     <div className="container">
+      <h1>Book Search</h1>
       <form onSubmit={handleSubmit}>
         <div className="">
           <input
@@ -52,11 +46,13 @@ export default function BookSearch() {
           <h1>{book.volumeInfo.title}</h1>
           <h3>by {book.volumeInfo.authors}</h3>
           <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.title} />
-          <button type="button" onClick={handleAdd}>
+          <button type="button" onClick={() => props.addToList(book)}>
             Add to Reading List
           </button>
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default BookSearch;

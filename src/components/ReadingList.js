@@ -1,11 +1,31 @@
-import "./App.css";
 import React, { Component } from "react";
-import BookSearch from "./components/BookSearch";
-import Navbar from "./components/Navbar";
 
 class ReadingList extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log("props in constructor", props);
+  }
   render() {
-    return <div className="App"></div>;
+    console.log("props from list", this.props);
+    const { books } = this.props;
+    return (
+      <div className="App">
+        <ul>
+          {books.map((book) => {
+            return (
+              <li key={book.id}>
+                <div>
+                  <h1>{book.volumeInfo.title}</h1>
+                  <h3>by {book.volumeInfo.authors}</h3>
+                  <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.title} />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
   }
 }
 

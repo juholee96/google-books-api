@@ -1,20 +1,46 @@
-import "./App.css";
 import React, { Component } from "react";
-import BookSearch from "./components/BookSearch";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//import axios from "axios";
 
-class App extends Component {
+import BookSearch from "./components/BookSearch";
+//import Navbar from "./components/Navbar";
+import ReadingList from "./components/ReadingList";
+
+export default class App extends Component {
+  state = {
+    readingList: [],
+  };
+
+  addToList = (book) => {
+    const { readingList } = this.state;
+
+    if (!readingList.some((alreadyAdded) => alreadyAdded.id === book.id)) {
+      this.setState({
+        readingList: [...this.state.readingList, book],
+      });
+    }
+
+    console.log("this.state.readingList---->", this.state.readingList);
+  };
+
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        <BookSearch />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <BookSearch addToList={this.addToList} />} />
+
+          <Route path="/readinglist">
+            <ReadingList books={this.state.readingList} />
+          </Route>
+        </Switch>
+      </Router>
+      // <div className="App">
+      //   <Navbar />
+      //   <BookSearch />
+      // </div>
     );
   }
 }
-
-export default App;
 
 //TO DO:
 // (tried using react hooks to challenge myself to learn hooks but issues with implementing reading list)
