@@ -19,6 +19,9 @@ export default class App extends Component {
         readingList: [...this.state.readingList, book],
       });
     }
+    // this.setState({
+    //   readingList: [...this.state.readingList, book],
+    // });
 
     console.log("this.state.readingList---->", this.state.readingList);
   };
@@ -29,9 +32,9 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <BookSearch addToList={this.addToList} />} />
 
-          <Route path="/readinglist">
-            <ReadingList books={this.state.readingList} />
-          </Route>
+          <Route
+            path="/readinglist"
+            render={() => <ReadingList books={this.state.readingList} />}></Route>
         </Switch>
       </Router>
       // <div className="App">
@@ -49,4 +52,11 @@ export default class App extends Component {
 // this allows me to implement anonymous function onClick on the button
 //
 // may need to write server side code, api routes, connect to thunk creators
+//
+//
+//
+//
+//Notes:
+// can't pass props properly to ReadingList comp.
+// after making a change --> need to double click to add the book to state.... smh
 //
